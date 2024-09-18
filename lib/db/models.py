@@ -90,6 +90,30 @@ class Category:
         category.save()
         return category
 
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return a Category object having the attribute values from the table row."""
+        category = cls.all.get(row[0])
+        if category:
+            category.name = row[1]
+        else:
+            category = cls(row[1])
+            category.id = row[0]
+            cls.all[category.id] = category
+        return category
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a Category object per row in the table"""
+        sql = """
+            SELECT *
+            FROM categories
+        """
+
+        rows = cursor.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
+
 
 class Expense:
     all = {}
@@ -215,6 +239,33 @@ class Expense:
         expense = cls(amount, date, category_id, user_id)
         expense.save()
         return expense
+
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return an Expense object having the attribute values from the table row."""
+        expense = cls.all.get(row[0])
+        if expense:
+            expense.amount = row[1]
+            expense.date = row[2]
+            expense.category_id = row[3]
+            expense.user_id = row[4]
+        else:
+            expense = cls(row[1], row[2], row[3], row[4])
+            expense.id = row[0]
+            cls.all[expense.id] = expense
+        return expense
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a Expense object per row in the table"""
+        sql = """
+            SELECT *
+            FROM expenses
+        """
+
+        rows = cursor.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
 
 
 class Income:
@@ -342,6 +393,33 @@ class Income:
         income.save()
         return income
 
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return an Expense object having the attribute values from the table row."""
+        income = cls.all.get(row[0])
+        if income:
+            income.source = row[1]
+            income.amount = row[2]
+            income.date = row[3]
+            income.user_id = row[4]
+        else:
+            income = cls(row[1], row[2], row[3], row[4])
+            income.id = row[0]
+            cls.all[income.id] = income
+        return income
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a Income object per row in the table"""
+        sql = """
+            SELECT *
+            FROM incomes
+        """
+
+        rows = cursor.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
+
 
 class User:
     all = {}
@@ -428,3 +506,27 @@ class User:
         user = cls(name)
         user.save()
         return user
+
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return a User object having the attribute values from the table row."""
+        user = cls.all.get(row[0])
+        if user:
+            user.name = row[1]
+        else:
+            user = cls(row[1])
+            user.id = row[0]
+            cls.all[user.id] = user
+        return user
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a User object per row in the table"""
+        sql = """
+            SELECT *
+            FROM users
+        """
+
+        rows = cursor.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
