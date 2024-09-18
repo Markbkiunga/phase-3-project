@@ -113,21 +113,72 @@ def create_user():
         print("Error creating user: ", exc)
 
 
-# def update_department():
-#     id_ = input("Enter the department's id: ")
-#     if department := Department.find_by_id(id_):
-#         try:
-#             name = input("Enter the department's new name: ")
-#             department.name = name
-#             location = input("Enter the department's new location: ")
-#             department.location = location
+def update_category():
+    id = input("Enter the category's id: ")
+    if category := Category.find_by_id(id):
+        try:
+            name = input("Enter the category's new name: ")
+            category.name = name
+            category.update()
+            print(f"Success: Category updated to {category}")
+        except Exception as exc:
+            print("Error updating category: ", exc)
+    else:
+        print(f"Category {id} not found")
 
-#             department.update()
-#             print(f"Success: {department}")
-#         except Exception as exc:
-#             print("Error updating department: ", exc)
-#     else:
-#         print(f"Department {id_} not found")
+
+def update_expense():
+    id = input("Enter the expense's id: ")
+    if expense := Expense.find_by_id(id):
+        try:
+            amount = float(input("Enter the expense's new amount: "))
+            expense.amount = amount
+            date = input("Enter the expense's new date: ")
+            expense.date = date
+            category_id = int(input("Enter the expense's new category_id: "))
+            expense.category_id = category_id
+            user_id = int(input("Enter the new expense's user_id: "))
+            expense.user_id = user_id
+            expense.update()
+            print(f"Success: Expense updated to {expense}")
+        except Exception as exc:
+            print("Error updating expense: ", exc)
+    else:
+        print(f"Expense {id} not found")
+
+
+def update_income():
+    id = input("Enter the income's id: ")
+    if income := Income.find_by_id(id):
+        try:
+            source = input("Enter the income's new source: ")
+            income.source = source
+            amount = float(input("Enter the income's new amount: "))
+            income.amount = amount
+            date = input("Enter the income's new date: ")
+            income.date = date
+            user_id = int(input("Enter the new income's user_id: "))
+            income.user_id = user_id
+            income.update()
+            print(f"Success: Income updated to {income}")
+        except Exception as exc:
+            print("Error updating income: ", exc)
+    else:
+        print(f"Income {id} not found")
+
+
+def update_user():
+    id = input("Enter the user's id: ")
+    if user := User.find_by_id(id):
+        try:
+            name = input("Enter the user's new name: ")
+            user.name = name
+            user.update()
+            print(f"Success: User updated to {user}")
+        except Exception as exc:
+            print("Error updating user: ", exc)
+    else:
+        print(f"User {id} not found")
 
 
 # def delete_department():
