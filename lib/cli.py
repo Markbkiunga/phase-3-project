@@ -9,6 +9,10 @@ from helpers import (
     find_expense_by_id,
     find_income_by_id,
     find_user_by_id,
+    create_category,
+    create_expense,
+    create_income,
+    create_user,
 )
 
 
@@ -34,6 +38,14 @@ def main():
             find_income_by_id()
         elif choice == "8":
             find_user_by_id()
+        elif choice == "9":
+            create_category()
+        elif choice == "10":
+            create_expense()
+        elif choice == "11":
+            create_income()
+        elif choice == "12":
+            create_user()
 
 
 def menu():
@@ -47,6 +59,10 @@ def menu():
     print("6 - Find an expense by ID")
     print("7 - Find an income by ID")
     print("8 - Find a user by ID")
+    print("9 - Create a new category")
+    print("10 - Create a new expense")
+    print("11 - Create a new income")
+    print("12 - Create a new user")
 
 
 if __name__ == "__main__":

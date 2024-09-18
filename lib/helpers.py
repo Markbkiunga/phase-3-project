@@ -69,3 +69,71 @@ def find_user_by_id():
         if user
         else print(f"User {id} not found")
     )
+
+
+def create_category():
+    name = input("Enter the category's name: ")
+    try:
+        category = Category.create(name)
+        print(f"Success: {category} created")
+    except Exception as exc:
+        print("Error creating category: ", exc)
+
+
+def create_expense():
+    amount = float(input("Enter the expense's amount: "))
+    date = input("Enter the expense's date: ")
+    category_id = int(input("Enter the expense's category_id: "))
+    user_id = int(input("Enter the expense's user_id: "))
+    try:
+        expense = Expense.create(amount, date, category_id, user_id)
+        print(f"Success: {expense} created")
+    except Exception as exc:
+        print("Error creating expense: ", exc)
+
+
+def create_income():
+    source = input("Enter the income's source: ")
+    amount = float(input("Enter the expense's amount: "))
+    date = input("Enter the expense's date: ")
+    user_id = int(input("Enter the expense's user_id: "))
+    try:
+        income = Income.create(source, amount, date, user_id)
+        print(f"Success: {income} created")
+    except Exception as exc:
+        print("Error creating income: ", exc)
+
+
+def create_user():
+    name = input("Enter the user's name: ")
+    try:
+        user = User.create(name)
+        print(f"Success: {user} created")
+    except Exception as exc:
+        print("Error creating user: ", exc)
+
+
+# def update_department():
+#     id_ = input("Enter the department's id: ")
+#     if department := Department.find_by_id(id_):
+#         try:
+#             name = input("Enter the department's new name: ")
+#             department.name = name
+#             location = input("Enter the department's new location: ")
+#             department.location = location
+
+#             department.update()
+#             print(f"Success: {department}")
+#         except Exception as exc:
+#             print("Error updating department: ", exc)
+#     else:
+#         print(f"Department {id_} not found")
+
+
+# def delete_department():
+#     id_ = input("Enter the department's id: ")
+#     if department := Department.find_by_id(id_):
+#         department.delete()
+#         print(f"Department {id_} deleted")
+#     else:
+#         print(f"Department {id_} not found")
