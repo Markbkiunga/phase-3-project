@@ -21,6 +21,7 @@ class Category:
     def name(self, name):
         if not isinstance(name, str):
             raise ValueError("Category Name must be a string")
+        self._name = name
 
     @classmethod
     def create_table(cls):
@@ -28,7 +29,8 @@ class Category:
         sql = """
             CREATE TABLE IF NOT EXISTS categories (
             id INTEGER PRIMARY KEY,
-            name TEXT,
+            name TEXT
+            )
         """
         cursor.execute(sql)
         conn.commit()
@@ -92,7 +94,7 @@ class Category:
 class Expense:
     all = {}
 
-    def __init__(self, amount, date, user_id):
+    def __init__(self, amount, date, category_id, user_id):
         self.amount = amount
         self.date = date
         self.category_id = category_id
@@ -107,8 +109,9 @@ class Expense:
 
     @amount.setter
     def amount(self, amount):
-        if not isinstance(amount, float) or amount > 0:
-            raise ValueError("Amount must be a float")
+        if not isinstance(amount, (float, int)) or amount <= 0:
+            raise ValueError("Amount must be a positive integer or float")
+        self._amount = float(amount)
 
     @property
     def date(self):
@@ -118,6 +121,7 @@ class Expense:
     def date(self, date):
         if not isinstance(date, str):
             raise ValueError("Date must be a string")
+        self._date = date
 
     @property
     def category_id(self):
@@ -127,6 +131,7 @@ class Expense:
     def category_id(self, category_id):
         if not isinstance(category_id, int):
             raise ValueError("Category ID must be an integer")
+        self._category_id = category_id
 
     @property
     def user_id(self):
@@ -135,6 +140,7 @@ class Expense:
     def user_id(self, user_id):
         if not isinstance(user_id, int):
             raise ValueError("User ID must be an integer")
+        self._user_id = user_id
 
     @classmethod
     def create_table(cls):
@@ -148,6 +154,7 @@ class Expense:
             user_id INTEGER,
             FOREIGN KEY (category_id) REFERENCES categories(id),
             FOREIGN KEY (user_id) REFERENCES users(id)
+            )
         """
         cursor.execute(sql)
         conn.commit()
@@ -230,6 +237,7 @@ class Income:
     def source(self, source):
         if not isinstance(source, str):
             raise ValueError("Source must be a string")
+        self._source = source
 
     @property
     def amount(self):
@@ -237,8 +245,9 @@ class Income:
 
     @amount.setter
     def amount(self, amount):
-        if not isinstance(amount, float) or amount > 0:
-            raise ValueError("Amount must be a float")
+        if not isinstance(amount, (int, float)) or amount <= 0:
+            raise ValueError("Amount must be a positive float or integer")
+        self._amount = float(amount)
 
     @property
     def date(self):
@@ -248,6 +257,7 @@ class Income:
     def date(self, date):
         if not isinstance(date, str):
             raise ValueError("Date must be a string")
+        self._date = date
 
     @property
     def user_id(self):
@@ -257,6 +267,7 @@ class Income:
     def user_id(self, user_id):
         if not isinstance(user_id, int):
             raise ValueError("User ID must be an integer")
+        self._user_id = user_id
 
     @classmethod
     def create_table(cls):
@@ -269,6 +280,7 @@ class Income:
             date TEXT NOT NULL,
             user_id INTEGER,
             FOREIGN KEY (user_id) REFERENCES users(id)
+            )
         """
         cursor.execute(sql)
         conn.commit()
@@ -348,6 +360,7 @@ class User:
     def name(self, name):
         if not isinstance(name, str):
             raise ValueError("Name must be a string")
+        self._name = name
 
     @classmethod
     def create_table(cls):
@@ -356,6 +369,7 @@ class User:
             CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY,
             name TEXT NOT NULL
+            )
         """
         cursor.execute(sql)
         conn.commit()
@@ -378,7 +392,7 @@ class User:
                 VALUES (?)
         """
 
-        cursor.execute(sql, (self.name))
+        cursor.execute(sql, (self.name,))
         conn.commit()
 
         self.id = cursor.lastrowid
