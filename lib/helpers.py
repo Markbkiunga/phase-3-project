@@ -181,10 +181,49 @@ def update_user():
         print(f"User {id} not found")
 
 
-# def delete_department():
-#     id_ = input("Enter the department's id: ")
-#     if department := Department.find_by_id(id_):
-#         department.delete()
-#         print(f"Department {id_} deleted")
-#     else:
-#         print(f"Department {id_} not found")
+def delete_category():
+    id = input("Enter the category's id: ")
+    if category := Category.find_by_id(id):
+        try:
+            category.delete()
+            print(f"Success: Category {id} deleted")
+        except Exception as exc:
+            print("Error deleting category: ", exc)
+    else:
+        print(f"Category {id} not found")
+
+
+def delete_expense():
+    id = input("Enter the expense's id: ")
+    if expense := Expense.find_by_id(id):
+        try:
+            expense.delete()
+            print(f"Success: Expense {id} deleted")
+        except Exception as exc:
+            print("Error deleting expense: ", exc)
+    else:
+        print(f"Expense {id} not found")
+
+
+def delete_income():
+    id = input("Enter the income's id: ")
+    if income := Income.find_by_id(id):
+        try:
+            income.delete()
+            print(f"Success: Income {id} deleted")
+        except Exception as exc:
+            print("Error deleting income: ", exc)
+    else:
+        print(f"Income {id} not found")
+
+
+def delete_user():
+    id = input("Enter the user's id: ")
+    if user := User.find_by_id(id):
+        try:
+            user.delete()
+            print(f"Success: User {id} deleted")
+        except Exception as exc:
+            print("Error deleting user: ", exc)
+    else:
+        print(f"User {id} not found")

@@ -17,6 +17,10 @@ from helpers import (
     update_expense,
     update_income,
     update_user,
+    delete_category,
+    delete_expense,
+    delete_income,
+    delete_user,
 )
 
 
@@ -58,6 +62,14 @@ def main():
             update_income()
         elif choice == "16":
             update_user()
+        elif choice == "17":
+            delete_category()
+        elif choice == "18":
+            delete_expense()
+        elif choice == "19":
+            delete_income()
+        elif choice == "20":
+            delete_user()
 
 
 def menu():
@@ -79,6 +91,10 @@ def menu():
     print("14 - Update an expense")
     print("15 - Update an income")
     print("16 - Update a user")
+    print("17 - Delete a category")
+    print("18 - Delete an expense")
+    print("19 - Delete an income")
+    print("20 - Delete a user")
 
 
 if __name__ == "__main__":
