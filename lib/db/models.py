@@ -114,6 +114,18 @@ class Category:
 
         return [cls.instance_from_db(row) for row in rows]
 
+    @classmethod
+    def find_by_id(cls, id):
+        """Return Category object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM categories
+            WHERE id = ?
+        """
+
+        row = cursor.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
 
 class Expense:
     all = {}
@@ -267,6 +279,18 @@ class Expense:
 
         return [cls.instance_from_db(row) for row in rows]
 
+    @classmethod
+    def find_by_id(cls, id):
+        """Return Expense object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM expenses
+            WHERE id = ?
+        """
+
+        row = cursor.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
 
 class Income:
     all = {}
@@ -278,7 +302,7 @@ class Income:
         self.user_id = user_id
 
     def __repr__(self):
-        return f"Income of {self.amount} on {self.date} sourced from {self.source} for user  {self.user_id}"
+        return f"Income of {self.amount} on {self.date} sourced from {self.source} for user {self.user_id}"
 
     @property
     def source(self):
@@ -420,6 +444,18 @@ class Income:
 
         return [cls.instance_from_db(row) for row in rows]
 
+    @classmethod
+    def find_by_id(cls, id):
+        """Return Income object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM incomes
+            WHERE id = ?
+        """
+
+        row = cursor.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
 
 class User:
     all = {}
@@ -530,3 +566,15 @@ class User:
         rows = cursor.execute(sql).fetchall()
 
         return [cls.instance_from_db(row) for row in rows]
+
+    @classmethod
+    def find_by_id(cls, id):
+        """Return User object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM users
+            WHERE id = ?
+        """
+
+        row = cursor.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
