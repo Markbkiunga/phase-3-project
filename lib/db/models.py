@@ -19,7 +19,7 @@ class Category:
 
     @name.setter
     def name(self, name):
-        if not isinstance(name, str):
+        if not isinstance(name, str) or name == '':
             raise ValueError("Category Name must be a string")
         self._name = name
 
