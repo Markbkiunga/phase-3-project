@@ -612,4 +612,6 @@ class User:
             WHERE user_id = ?
         """
         return cursor.execute(sql, (self.id,)).fetchone()[0]
-    
+
+    def net_income(self):
+        return self.total_incomes() - self.total_expenses()

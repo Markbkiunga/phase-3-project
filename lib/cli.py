@@ -23,6 +23,7 @@ from helpers import (
     delete_user,
     list_user_expenses,
     list_user_incomes,
+    user_net_income,
 )
 
 
@@ -76,6 +77,8 @@ def main():
             list_user_expenses()
         elif choice == "22":
             list_user_incomes()
+        elif choice == "23":
+            user_net_income()
 
 
 def menu():
@@ -103,6 +106,7 @@ def menu():
     print("20 - Delete a user")
     print("21 - List user expenses")
     print("22 - List user incomes")
+    print("23 - Get a user's net income")
 
 
 if __name__ == "__main__":
