@@ -21,6 +21,7 @@ from helpers import (
     delete_expense,
     delete_income,
     delete_user,
+    list_user_expenses,
 )
 
 
@@ -70,6 +71,8 @@ def main():
             delete_income()
         elif choice == "20":
             delete_user()
+        elif choice == '21':
+            list_user_expenses()
 
 
 def menu():
@@ -95,6 +98,7 @@ def menu():
     print("18 - Delete an expense")
     print("19 - Delete an income")
     print("20 - Delete a user")
+    print("21 - List user expenses")
 
 
 if __name__ == "__main__":

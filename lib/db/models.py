@@ -578,3 +578,12 @@ class User:
 
         row = cursor.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
+
+    def expenses(self):
+        """Return a list of Expense objects corresponding to the table rows matching the specified user_id"""
+        sql = """
+            SELECT * FROM expenses
+            WHERE user_id = ?
+        """
+        rows = cursor.execute(sql, (self.id,)).fetchall()
+        return [Expense.instance_from_db(row) for row in rows]

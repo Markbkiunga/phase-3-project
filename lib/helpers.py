@@ -227,3 +227,17 @@ def delete_user():
             print("Error deleting user: ", exc)
     else:
         print(f"User {id} not found")
+
+
+def list_user_expenses():
+    id = input("Enter the user's id: ")
+    number = 1
+    if user := User.find_by_id(id):
+        try:
+            print("\nExpenses Found!")
+            expenses = user.expenses()
+            for expense in expenses:
+                print(f"\n{number}. {expense}\n")
+                number += 1
+        except Exception as exc:
+            print("Error listing user's expenses: ", exc)
