@@ -595,3 +595,21 @@ class User:
             WHERE user_id = ?
         """
         return cursor.execute(sql, (self.id,)).fetchone()[0]
+
+    def incomes(self):
+        """Return a list of Income objects corresponding to the table rows matching the specified user_id"""
+        sql = """
+            SELECT * FROM incomes
+            WHERE user_id = ?
+        """
+        rows = cursor.execute(sql, (self.id,)).fetchall()
+        return [Income.instance_from_db(row) for row in rows]
+
+    def total_incomes(self):
+        """Return the total amount of income for the user"""
+        sql = """
+            SELECT SUM(amount) FROM incomes
+            WHERE user_id = ?
+        """
+        return cursor.execute(sql, (self.id,)).fetchone()[0]
+    

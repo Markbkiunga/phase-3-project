@@ -244,3 +244,20 @@ def list_user_expenses():
             print("----------------------------------------------\n")
         except Exception as exc:
             print("Error listing user's expenses: ", exc)
+
+
+def list_user_incomes():
+    id = input("Enter the user's id: ")
+    number = 1
+    if user := User.find_by_id(id):
+        try:
+            print("\nIncomes Found!")
+            incomes = user.incomes()
+            for income in incomes:
+                print(f"{number}. {income}")
+                number += 1
+            print("----------------------------------------------")
+            print(f"Total Incomes: {user.total_incomes()}")
+            print("----------------------------------------------\n")
+        except Exception as exc:
+            print("Error listing user's incomes: ", exc)
