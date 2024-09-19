@@ -587,3 +587,11 @@ class User:
         """
         rows = cursor.execute(sql, (self.id,)).fetchall()
         return [Expense.instance_from_db(row) for row in rows]
+
+    def total_expenses(self):
+        """Return the total amount of expenses for the user"""
+        sql = """
+            SELECT SUM(amount) FROM expenses
+            WHERE user_id = ?
+        """
+        return cursor.execute(sql, (self.id,)).fetchone()[0]

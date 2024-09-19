@@ -237,7 +237,10 @@ def list_user_expenses():
             print("\nExpenses Found!")
             expenses = user.expenses()
             for expense in expenses:
-                print(f"\n{number}. {expense}\n")
+                print(f"{number}. {expense}")
                 number += 1
+            print("----------------------------------------------")
+            print(f"Total Expenses: {user.total_expenses()}")
+            print("----------------------------------------------\n")
         except Exception as exc:
             print("Error listing user's expenses: ", exc)
