@@ -55,8 +55,8 @@ Ensure you have the following installed:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/finance-manager-cli.git
-   cd finance-manager-cli
+   git clone https://github.com/yourusername/phase-3-project.git
+   cd phase-3-project
    ```
 
 2. **Create a virtual environment** (recommended):
