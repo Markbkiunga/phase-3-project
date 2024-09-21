@@ -148,7 +148,7 @@ Here's an overview of what each menu option does:
 20. **Delete a User**: Remove a user from the system.
 21. **List User Expenses**: View all expenses for a given user.
 22. **List User Incomes**: View all incomes for a given user.
-23. **Get a User's Net Income**: Calculate a user's net income (total income minus total expenses).
+23. **Get a User\'s Net Income**: Calculate a user's net income (total income minus total expenses).
 
 ---
 
